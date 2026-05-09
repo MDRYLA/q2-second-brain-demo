@@ -1,0 +1,59 @@
+/* ============================================================
+   PALETA A — „ŚWIECA" (domyślna)
+   Medieval, dostojny, świeca w zamku. Ciepły bursztyn na czerni.
+   ============================================================ */
+
+/* --- TRYB CIEMNY (domyślny) --- */
+:root[data-palette="swieca"] {
+  --bg-primary:    #0f0e0c;   /* tło strony */
+  --bg-secondary:  #1a1815;   /* nagłówki, panele */
+  --bg-elevated:   #25211c;   /* karty */
+  --bg-surface:    #2b2823;   /* aktywne/hover */
+
+  --fg-primary:    #e8dfd0;   /* główny tekst */
+  --fg-secondary:  #a89e8a;   /* podtytuły */
+  --fg-muted:      #6e6557;   /* meta, captions */
+  --fg-faint:      #4a4238;   /* najsłabszy, ornamenty */
+
+  --accent:        #c89d4a;   /* jedyna barwa akcentowa */
+  --accent-hover:  #d4aa5a;
+  --accent-dim:    rgba(200, 157, 74, 0.15);   /* ::selection, chip bg */
+
+  /* barwy semantyczne (rzadko używane — tylko status/chip) */
+  --moss:          #4a5d3a;
+  --blood:         #7a2a2a;
+  --rust:          #8a4a2a;
+
+  --border-subtle: #35302a;   /* dividery, karty */
+  --border-medium: #48423a;   /* outline buttony */
+  --border-strong: var(--accent);
+
+  --theme-name:    "swieca";
+}
+
+/* --- TRYB JASNY — „pergamin" / stary papier --- */
+:root[data-palette="swieca"][data-theme="light"] {
+  --bg-primary:    #f5ecd7;
+  --bg-secondary:  #ede2c9;
+  --bg-elevated:   #e4d7ba;
+  --bg-surface:    #dccaa6;
+
+  --fg-primary:    #1f1a10;
+  --fg-secondary:  #4a3f2e;
+  --fg-muted:      #7a6d58;
+  --fg-faint:      #a89878;
+
+  --accent:        #8a6322;
+  --accent-hover:  #6f4f1a;
+  --accent-dim:    rgba(138, 99, 34, 0.14);
+
+  --moss:          #5a6b3d;
+  --blood:         #7a2a2a;
+  --rust:          #8a4a2a;
+
+  --border-subtle: #d4c4a0;
+  --border-medium: #b8a477;
+  --border-strong: var(--accent);
+
+  --theme-name:    "swieca-light";
+}

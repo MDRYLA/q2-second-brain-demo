@@ -1,0 +1,61 @@
+/* ============================================================
+   PALETA D — „ZIEMIA" (default po wyborze Kacpra 2026-04-25)
+   Biophilic earth tones, leśna zieleń + ciepły off-white.
+   Light mode = default (chwila oddechu, zero presji).
+   ============================================================ */
+
+/* --- TRYB JASNY (domyślny dla Ziemia) --- */
+:root[data-palette="ziemia"],
+:root[data-palette="ziemia"][data-theme="light"] {
+  --bg-primary:    #F3EFE7;   /* główne tło — warm earth off-white */
+  --bg-secondary:  #EBE5D9;   /* sidebar, panele */
+  --bg-elevated:   #FAFAF7;   /* karty, formularze */
+  --bg-surface:    #E3DDD0;   /* aktywne / hover */
+
+  --fg-primary:    #2d3a2e;   /* główny tekst — forest dark */
+  --fg-secondary:  #4a5c4b;   /* podtytuły */
+  --fg-muted:      #5a6e5b;   /* meta, captions */
+  --fg-faint:      #b0bfb1;   /* najsłabszy, hint */
+
+  --accent:        #4a7c59;   /* forest green — jedyna barwa akcentowa */
+  --accent-hover:  #3d6849;
+  --accent-dim:    rgba(74, 124, 89, 0.12);   /* selection, chip bg */
+
+  /* barwy semantyczne (oszczędnie — tylko status/chip) */
+  --moss:          #6b8e23;
+  --blood:         #8b3a3a;
+  --rust:          #8a5a2a;
+
+  --border-subtle: #D5CFC4;   /* dividery, karty */
+  --border-medium: #b8b099;   /* outline buttony */
+  --border-strong: var(--accent);
+
+  --theme-name:    "ziemia";
+}
+
+/* --- TRYB CIEMNY (deep forest) --- */
+:root[data-palette="ziemia"][data-theme="dark"] {
+  --bg-primary:    #1a2620;   /* deep forest */
+  --bg-secondary:  #232f28;
+  --bg-elevated:   #2c3a32;
+  --bg-surface:    #364a3c;
+
+  --fg-primary:    #e8ddc8;   /* warm cream */
+  --fg-secondary:  #b5a888;
+  --fg-muted:      #7a7160;
+  --fg-faint:      #4a4a3a;
+
+  --accent:        #6ba577;   /* lżejszy forest dla kontrastu na ciemnym tle */
+  --accent-hover:  #7cb888;
+  --accent-dim:    rgba(107, 165, 119, 0.18);
+
+  --moss:          #7d9c4a;
+  --blood:         #b85a4a;
+  --rust:          #c87850;
+
+  --border-subtle: #3a4a3f;
+  --border-medium: #556657;
+  --border-strong: var(--accent);
+
+  --theme-name:    "ziemia-dark";
+}

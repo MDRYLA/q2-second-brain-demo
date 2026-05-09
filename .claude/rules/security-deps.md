@@ -1,0 +1,6 @@
+- .env dla sekretów — NIGDY hardcode w kodzie
+- .gitignore: .env, .env.local, .env.production, node_modules, .next, .vercel, dist, .DS_Store
+- .env.example commitowane z dummy values (placeholder URLs, "sk-ant-xxx-placeholder", etc.)
+- Weryfikuj nazwy pakietów przed install (typosquatting — szczególnie po atakach SANDWORM/DevTap 2026)
+- npm audit przed każdym pushem (`npm audit --audit-level=high` exit 0)
+- Lockfile (package-lock.json / pnpm-lock.yaml) commitowany — bez tego deps niereprodukowalne

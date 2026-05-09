@@ -1,0 +1,59 @@
+/* ============================================================
+   PALETA B — „ATLAS"
+   Kartograficzny, noc nad mapą podróżnika XIX w.
+   Granaty + matowe złoto.
+   ============================================================ */
+
+/* --- TRYB CIEMNY --- */
+:root[data-palette="atlas"] {
+  --bg-primary:    #0a1220;
+  --bg-secondary:  #121a2c;
+  --bg-elevated:   #1a2439;
+  --bg-surface:    #1f2a44;
+
+  --fg-primary:    #e6ddc5;
+  --fg-secondary:  #9fa6b8;
+  --fg-muted:      #6a7289;
+  --fg-faint:      #424a5e;
+
+  --accent:        #b58846;
+  --accent-hover:  #c79a55;
+  --accent-dim:    rgba(181, 136, 70, 0.15);
+
+  --moss:          #3e6b5a;
+  --blood:         #6a2f3a;
+  --rust:          #7a5632;
+
+  --border-subtle: #25304a;
+  --border-medium: #39456b;
+  --border-strong: var(--accent);
+
+  --theme-name:    "atlas";
+}
+
+/* --- TRYB JASNY — „Mapa na morzu" (chłodny papier morski) --- */
+:root[data-palette="atlas"][data-theme="light"] {
+  --bg-primary:    #dde7f2;
+  --bg-secondary:  #ccd9ea;
+  --bg-elevated:   #bccada;
+  --bg-surface:    #aabbcf;
+
+  --fg-primary:    #0a1a33;
+  --fg-secondary:  #25365a;
+  --fg-muted:      #4a5c80;
+  --fg-faint:      #7a89a8;
+
+  --accent:        #1f4a7c;
+  --accent-hover:  #163866;
+  --accent-dim:    rgba(31, 74, 124, 0.14);
+
+  --moss:          #3e6b5a;
+  --blood:         #6a2f3a;
+  --rust:          #7a5632;
+
+  --border-subtle: #a8bbd2;
+  --border-medium: #8299b5;
+  --border-strong: var(--accent);
+
+  --theme-name:    "atlas-light";
+}

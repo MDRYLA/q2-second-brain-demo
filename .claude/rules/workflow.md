@@ -1,0 +1,5 @@
+- Plan Mode ZAWSZE przed budowaniem
+- Verification loop: TASK → DO → VERIFY (screenshot/test/grep) → iterate
+- Po feature: "Jak mógłbym to zrobić szybciej?" → zapisz do CLAUDE.local.md
+- Zaktualizuj CLAUDE.md po sesji z istotnymi zmianami
+- Public demo specifics: każdy commit musi przejść grep-secrets check (sk-ant-, eyJhbGci, sbp_, sk_live, ghp_, AIza, AKIA) PRZED `git add`

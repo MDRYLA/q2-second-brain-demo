@@ -1,0 +1,159 @@
+/* ============================================================
+   BASE — reset + typografia + utilities
+   Wklej PO tokenach (tokens-*.css). Zależy od zmiennych --*
+   zdefiniowanych tam.
+
+   Uwaga: font-family odwołuje się do zmiennych --font-display /
+   --font-body / --font-mono. Patrz design/fonts/README.md —
+   musisz je wstrzyknąć (przez next/font lub link do Google Fonts
+   + CSS variables w :root).
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-primary);
+  color: var(--fg-primary);
+  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100dvh;
+  min-height: 100vh;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--fg-primary);
+  margin: 0;
+}
+
+p { margin: 0; }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover { color: var(--accent-hover); }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0;
+}
+
+::selection {
+  background: var(--accent-dim);
+  color: var(--fg-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* === UTILITIES TYPO === */
+.font-display { font-family: var(--font-display), Georgia, serif; }
+.font-body    { font-family: var(--font-body), system-ui, sans-serif; }
+.font-mono    { font-family: var(--font-mono), Menlo, monospace; }
+
+.eyebrow {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--fg-muted);
+}
+
+.hero-title {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(38px, 10vw, 64px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.page-title {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(28px, 6vw, 40px);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(22px, 4.5vw, 28px);
+  line-height: 1.2;
+}
+
+.italic-subtitle {
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: clamp(16px, 3.5vw, 20px);
+  color: var(--fg-secondary);
+}
+
+/* === DIVIDER ORNAMENT (linia + znak pośrodku) === */
+.divider-ornament {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 32px 0;
+}
+
+.divider-ornament::before,
+.divider-ornament::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+.divider-ornament__mark {
+  color: var(--fg-muted);
+  font-size: 14px;
+}
+
+/* === SCROLLBAR (cienki, w kolorze ramki) === */
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: 3px;
+}
+
+/* === BOTTOM NAV PADDING HELPER === */
+.with-bottom-nav {
+  padding-bottom: calc(72px + env(safe-area-inset-bottom));
+}
+
+/* === FADE-IN (jedyna animacja w design system) === */
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in {
+    animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}

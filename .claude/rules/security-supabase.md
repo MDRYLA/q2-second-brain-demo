@@ -1,0 +1,6 @@
+- RLS na KAŻDEJ tabeli — bez wyjątków
+- service_role key TYLKO server-side (API routes, Server Actions), NIGDY w kliencie ani w `NEXT_PUBLIC_*`
+- Server-side validation — frontend = kosmetyka
+- Każda policy ma `auth.uid() = user_id` lub równoważne — NIGDY hardcoded UUID
+- W public demo: wszystkie bezpośrednie calle do Supabase muszą być za `if (!DEMO_MODE)` guard — demo MUSI działać bez backendu
+- Migracje (supabase/migrations/*.sql) zostają — to struktura. Seed data MUSI być generic Lorem Ipsum (NIE Kacpra realne dane).

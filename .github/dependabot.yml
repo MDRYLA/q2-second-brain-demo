@@ -1,0 +1,21 @@
+# Faza 7 hardening (2026-05-08): automatyczne weekly alerty CVE w 622+ pakietach.
+# Bez tego: critical CVE w transitive dependency siedzi miesiące bez alertu.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Warsaw"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "security"
+    # Group minor + patch updates do 1 PR (zmniejsza spam).
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"

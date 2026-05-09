@@ -1,0 +1,8 @@
+- "use client" TYLKO gdy komponent używa hooks/interaktywności (useState, useEffect, onClick, etc.)
+- Server Components domyślnie — client tylko gdy musi
+- Nie mieszaj server/client state — przekazuj przez props, nie przez globalne mutable
+- Server Actions dla mutacji formularzy (post-Next.js 14 pattern)
+- Middleware (`src/middleware.ts`): Fluid Compute (Node.js runtime) — NIE Edge Runtime, NIE używaj `experimental-edge`
+- App Router only — żaden Pages Router (`src/pages/` nie powinien istnieć)
+- next/image dla obrazków — NIE `<img>` (lazy loading + optimization za darmo)
+- next/link dla nawigacji wewnętrznej — NIE `<a href>` (prefetch + client-side routing)

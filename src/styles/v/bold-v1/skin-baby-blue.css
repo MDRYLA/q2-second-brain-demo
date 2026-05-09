@@ -1,0 +1,358 @@
+/* Bold v1 — skin "baby-blue" override.
+ * Selektor: .v-bold-v1[data-skin="baby-blue"]
+ * Vibe: light pastel — sky/baby blue tło zamiast deep green, cream/white cards,
+ * red+yellow akcenty zachowane (warmth contrast na cool bg).
+ */
+
+.v-bold-v1[data-skin="baby-blue"] {
+  /* Palette override */
+  --bv1-bg-deep: #b8d4f0;             /* baby blue main */
+  --bv1-bg-card: #ffffff;              /* clean white cards */
+  --bv1-bg-card-warm: #f5fbff;         /* super light blue tint */
+  --bv1-text-on-deep: #1a3a5a;         /* deep navy text on light bg */
+  --bv1-text-muted-on-deep: rgba(26, 58, 90, 0.65);
+  --bv1-text-handwritten: #d63b2a;     /* zachowuje czerwoną kursywę dla magazine vibe */
+
+  /* Background z subtelnym gradient mesh (sky → baby blue) */
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(255, 255, 255, 0.55), transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(245, 251, 255, 0.55), transparent 55%),
+    linear-gradient(135deg, #c5dcf2 0%, #b8d4f0 50%, #a8c8e8 100%);
+
+  /* Sidebar bg — głębszy blue dla kontrastu */
+  --bv1-shadow-card: 0 4px 16px rgba(26, 58, 90, 0.12), 0 1px 3px rgba(26, 58, 90, 0.08);
+  --bv1-shadow-elevated: 0 12px 32px rgba(26, 58, 90, 0.20), 0 4px 8px rgba(26, 58, 90, 0.10);
+  --bv1-shadow-hover: 0 8px 24px rgba(214, 59, 42, 0.20), 0 2px 6px rgba(26, 58, 90, 0.10);
+
+  /* Override globals palette dla skin baby-blue */
+  --bg-primary: #b8d4f0;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-elevated: #f5fbff;
+  --bg-surface: #ffffff;
+  --fg-primary: #1a3a5a;
+  --fg-secondary: rgba(26, 58, 90, 0.70);
+  --fg-muted: rgba(26, 58, 90, 0.55);
+  --fg-faint: rgba(26, 58, 90, 0.40);
+  --border-subtle: rgba(26, 58, 90, 0.10);
+  --border-medium: rgba(26, 58, 90, 0.20);
+  --border-light: rgba(26, 58, 90, 0.05);
+}
+
+/* Sidebar w skin baby-blue: subtle white glass na blue tle */
+.v-bold-v1[data-skin="baby-blue"] .bv1-sidebar {
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  border-right: 1px solid rgba(26, 58, 90, 0.10);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .bv1-mobile-topbar,
+.v-bold-v1[data-skin="baby-blue"] .bv1-mobile-bottom-nav {
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-color: rgba(26, 58, 90, 0.10);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .bv1-nav-item {
+  color: var(--bv1-text-on-deep);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .bv1-nav-item:hover {
+  background: rgba(214, 59, 42, 0.08);
+  color: var(--bv1-accent-red);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .bv1-nav-item.is-active {
+  background: rgba(214, 59, 42, 0.14);
+  color: var(--bv1-accent-red-dark);
+  border-left-color: var(--bv1-accent-red);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .bv1-nav-section-label {
+  color: rgba(26, 58, 90, 0.55);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .bv1-mobile-nav-item {
+  color: var(--bv1-text-on-deep);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .bv1-mobile-nav-item.is-active {
+  color: var(--bv1-accent-red);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .bv1-brand-name {
+  color: var(--bv1-accent-red);
+}
+
+/* Cards — białe na light blue */
+.v-bold-v1[data-skin="baby-blue"] .bv1-card,
+.v-bold-v1[data-skin="baby-blue"] .bv1-card-hero,
+.v-bold-v1[data-skin="baby-blue"] .ci-section,
+.v-bold-v1[data-skin="baby-blue"] .co-section,
+.v-bold-v1[data-skin="baby-blue"] .ci-readonly-block,
+.v-bold-v1[data-skin="baby-blue"] .ci-plan-preview,
+.v-bold-v1[data-skin="baby-blue"] .kaskada-banner,
+.v-bold-v1[data-skin="baby-blue"] .plan-section,
+.v-bold-v1[data-skin="baby-blue"] .tydzien-section,
+.v-bold-v1[data-skin="baby-blue"] .dash-card,
+.v-bold-v1[data-skin="baby-blue"] .passphrase-card,
+.v-bold-v1[data-skin="baby-blue"] .login-card {
+  background: #ffffff;
+  border-color: rgba(26, 58, 90, 0.08);
+  box-shadow: 0 4px 16px rgba(26, 58, 90, 0.10), 0 1px 3px rgba(26, 58, 90, 0.06);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .bv1-form-section {
+  background: #f5fbff;
+  border-color: rgba(26, 58, 90, 0.08);
+  border-left-color: var(--bv1-accent-red);
+}
+
+/* Faza 8 Krok B3 — cytat dnia czytelny w Baby Blue (handwriting Caveat na light-blue tle).
+   Wczesniej: inline style color: var(--bv1-text-on-card) wygrywal, ale font Caveat italic
+   blado wyglądał na light bg → user perceived as "żółty/nieczytelny".
+   Forced navy color z !important żeby przebić inline style cytatu. */
+.v-bold-v1[data-skin="baby-blue"] .bv1-quote-text,
+.v-bold-v1[data-skin="baby-blue"] .bv1-card-hero .bv1-handwritten {
+  color: #1a3a5a !important;
+}
+
+/* Drawer overlay */
+.v-bold-v1[data-skin="baby-blue"] .bv1-modal-backdrop {
+  background: rgba(26, 58, 90, 0.55);
+}
+
+/* Inputs białe */
+.v-bold-v1[data-skin="baby-blue"] .bv1-input,
+.v-bold-v1[data-skin="baby-blue"] .bv1-textarea,
+.v-bold-v1[data-skin="baby-blue"] .ci-input,
+.v-bold-v1[data-skin="baby-blue"] .ci-textarea,
+.v-bold-v1[data-skin="baby-blue"] .co-input,
+.v-bold-v1[data-skin="baby-blue"] .co-textarea {
+  background: #ffffff;
+  border-color: rgba(26, 58, 90, 0.18);
+  color: var(--bv1-text-on-card);
+}
+
+/* Word btn cream → white */
+.v-bold-v1[data-skin="baby-blue"] .bv1-word-btn,
+.v-bold-v1[data-skin="baby-blue"] .ci-word-btn {
+  background: #ffffff;
+  border-color: rgba(26, 58, 90, 0.15);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .bv1-word-btn.is-active,
+.v-bold-v1[data-skin="baby-blue"] .ci-word-btn.active,
+.v-bold-v1[data-skin="baby-blue"] .ci-word-btn.is-active {
+  background: var(--bv1-accent-red);
+  color: #ffffff;
+  border-color: var(--bv1-accent-red);
+}
+
+/* Quick-tick items */
+.v-bold-v1[data-skin="baby-blue"] .quick-tick-item,
+.v-bold-v1[data-skin="baby-blue"] .dash-quick-tick-item,
+.v-bold-v1[data-skin="baby-blue"] .bv1-tick-item {
+  background: #ffffff;
+  border-color: rgba(26, 58, 90, 0.12);
+  color: var(--bv1-text-on-card);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .quick-tick-item.checked,
+.v-bold-v1[data-skin="baby-blue"] .dash-quick-tick-item.checked,
+.v-bold-v1[data-skin="baby-blue"] .bv1-tick-item.is-checked {
+  background: var(--bv1-accent-yellow);
+  border-color: var(--bv1-accent-yellow);
+}
+
+/* Eyebrow / page subtitle dla baby-blue */
+.v-bold-v1[data-skin="baby-blue"] .bv1-page-subtitle {
+  color: #2a5a8a;
+}
+
+.v-bold-v1[data-skin="baby-blue"] .bv1-empty-state-title {
+  color: #4a7fc8;
+}
+
+/* Section h::after — accent red */
+.v-bold-v1[data-skin="baby-blue"] .bv1-section-h {
+  color: var(--bv1-text-on-deep);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .bv1-form-section .bv1-section-h {
+  color: var(--bv1-text-on-card);
+}
+
+/* Section title (legacy) */
+.v-bold-v1[data-skin="baby-blue"] .section-title,
+.v-bold-v1[data-skin="baby-blue"] .ci-section-title,
+.v-bold-v1[data-skin="baby-blue"] .dash-card-title {
+  color: var(--bv1-accent-red);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .page-content,
+.v-bold-v1[data-skin="baby-blue"] .page-header h1,
+.v-bold-v1[data-skin="baby-blue"] .page-content h1 {
+  color: var(--bv1-text-on-deep);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .page-header h1,
+.v-bold-v1[data-skin="baby-blue"] .page-content h1,
+.v-bold-v1[data-skin="baby-blue"] .bv1-page-title {
+  color: var(--bv1-accent-red);
+}
+
+/* Skeleton tone */
+.v-bold-v1[data-skin="baby-blue"] .bv1-skeleton {
+  background: rgba(26, 58, 90, 0.10);
+}
+
+/* Bullet items */
+.v-bold-v1[data-skin="baby-blue"] .bv1-bullet-item {
+  background: #ffffff;
+  border-color: rgba(26, 58, 90, 0.10);
+}
+
+/* Plan preview tasks */
+.v-bold-v1[data-skin="baby-blue"] .bv1-plan-preview-task {
+  background: #ffffff;
+  border-color: rgba(26, 58, 90, 0.10);
+}
+
+/* DayMiniGrid hour rows */
+.v-bold-v1[data-skin="baby-blue"] .dash-mini-grid {
+  background: #ffffff;
+  border-color: rgba(26, 58, 90, 0.10);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .dash-mini-grid-hour-row {
+  border-top-color: rgba(26, 58, 90, 0.10);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .dash-mini-grid-block {
+  background: #f5fbff;
+  border-left-color: var(--bv1-accent-red);
+}
+
+/* Empty state */
+.v-bold-v1[data-skin="baby-blue"] .bv1-empty {
+  background: #f5fbff;
+  border-color: rgba(26, 58, 90, 0.12);
+  color: rgba(26, 58, 90, 0.65);
+}
+
+/* TaskChips */
+.v-bold-v1[data-skin="baby-blue"] .task-chip,
+.v-bold-v1[data-skin="baby-blue"] .bv1-chip {
+  background: #ffffff;
+  border-color: rgba(26, 58, 90, 0.15);
+  color: var(--bv1-text-on-card);
+}
+
+/* Optional tag */
+.v-bold-v1[data-skin="baby-blue"] .bv1-opt-tag,
+.v-bold-v1[data-skin="baby-blue"] .opt-tag {
+  color: rgba(26, 58, 90, 0.55);
+}
+
+/* === SkinToggle styling for bold-v1 === */
+.v-bold-v1 .v-skin-toggle {
+  display: inline-flex;
+  align-items: stretch;
+  background: rgba(251, 248, 238, 0.06);
+  border: 1px solid rgba(251, 248, 238, 0.10);
+  border-radius: var(--bv1-radius-pill);
+  padding: 3px;
+  gap: 0;
+}
+
+.v-bold-v1 .v-skin-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  font-family: var(--bv1-font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: var(--bv1-radius-pill);
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+  user-select: none;
+  border: none;
+  background: transparent;
+  color: var(--bv1-text-muted-on-deep);
+}
+
+.v-bold-v1 .v-skin-pill.v-skin-active {
+  background: var(--bv1-accent-yellow);
+  color: var(--bv1-text-on-card);
+  cursor: default;
+}
+
+.v-bold-v1 .v-skin-pill.v-skin-inactive:hover {
+  color: var(--bv1-accent-yellow);
+  background: rgba(251, 248, 238, 0.04);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .v-skin-toggle {
+  background: rgba(255, 255, 255, 0.45);
+  border-color: rgba(26, 58, 90, 0.12);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .v-skin-pill {
+  color: rgba(26, 58, 90, 0.65);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .v-skin-pill.v-skin-active {
+  background: var(--bv1-accent-red);
+  color: #ffffff;
+}
+
+.v-bold-v1[data-skin="baby-blue"] .v-skin-pill.v-skin-inactive:hover {
+  color: var(--bv1-accent-red);
+  background: rgba(26, 58, 90, 0.04);
+}
+
+/* === VariantToggle restyling w skin baby-blue === */
+.v-bold-v1[data-skin="baby-blue"] .v-toggle {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(26, 58, 90, 0.12);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .v-toggle-active {
+  background: var(--bv1-accent-red);
+  color: #ffffff;
+}
+
+.v-bold-v1[data-skin="baby-blue"] .v-toggle-inactive {
+  color: rgba(26, 58, 90, 0.65);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .v-toggle-inactive:hover {
+  color: var(--bv1-accent-red);
+  background: rgba(26, 58, 90, 0.04);
+}
+
+/* Page header border */
+.v-bold-v1[data-skin="baby-blue"] .bv1-page-header {
+  border-bottom-color: rgba(26, 58, 90, 0.12);
+}
+
+/* Buttons accent (login-btn, ci-save-btn — bold-v1 zachowuje czerwony) */
+.v-bold-v1[data-skin="baby-blue"] .login-btn,
+.v-bold-v1[data-skin="baby-blue"] .ci-save-btn,
+.v-bold-v1[data-skin="baby-blue"] .bv1-btn-primary {
+  background: var(--bv1-accent-red);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(214, 59, 42, 0.28);
+}
+
+.v-bold-v1[data-skin="baby-blue"] .bv1-btn-secondary {
+  background: #ffffff;
+  color: var(--bv1-accent-red);
+  border-color: var(--bv1-accent-red);
+}

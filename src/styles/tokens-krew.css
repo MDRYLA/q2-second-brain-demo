@@ -1,0 +1,58 @@
+/* ============================================================
+   PALETA C — „KREW I KAMIEŃ"
+   Highland gotyk, tartan blood. Czerń + ciemna czerwień.
+   ============================================================ */
+
+/* --- TRYB CIEMNY --- */
+:root[data-palette="krew"] {
+  --bg-primary:    #0c0a0a;
+  --bg-secondary:  #16100f;
+  --bg-elevated:   #1f1615;
+  --bg-surface:    #261a19;
+
+  --fg-primary:    #ebe3db;
+  --fg-secondary:  #9d9088;
+  --fg-muted:      #675d57;
+  --fg-faint:      #3f3935;
+
+  --accent:        #8e3a3a;
+  --accent-hover:  #a14848;
+  --accent-dim:    rgba(142, 58, 58, 0.18);
+
+  --moss:          #4a6144;
+  --blood:         #5c1f1f;
+  --rust:          #7a3a26;
+
+  --border-subtle: #2b2120;
+  --border-medium: #3f2f2e;
+  --border-strong: var(--accent);
+
+  --theme-name:    "krew";
+}
+
+/* --- TRYB JASNY — „Różany pergamin" --- */
+:root[data-palette="krew"][data-theme="light"] {
+  --bg-primary:    #f4e1dc;
+  --bg-secondary:  #ead0c9;
+  --bg-elevated:   #dfc0b7;
+  --bg-surface:    #cfaba0;
+
+  --fg-primary:    #2a0f0f;
+  --fg-secondary:  #4d2020;
+  --fg-muted:      #7a4a4a;
+  --fg-faint:      #a07878;
+
+  --accent:        #8e2a2a;
+  --accent-hover:  #6e1b1b;
+  --accent-dim:    rgba(142, 42, 42, 0.14);
+
+  --moss:          #4a6144;
+  --blood:         #5c1f1f;
+  --rust:          #7a3a26;
+
+  --border-subtle: #d8b8af;
+  --border-medium: #b5928a;
+  --border-strong: var(--accent);
+
+  --theme-name:    "krew-light";
+}

@@ -1,0 +1,6 @@
+- NIE zmieniaj kolorów/fontów/layoutu bez zgody Kacpra
+- NIE dodawaj bibliotek bez pytania
+- NIE commituj bez opisu co i dlaczego
+- NIE pushuj bez explicit zgody Kacpra
+- NIE używaj credentials z oryginalnego projektu (aplikacja-second-brain) — to jest public demo, MUSI być odłączone
+- Gdy popełnisz błąd — dodaj regułę do `.claude/learned-rules.md`

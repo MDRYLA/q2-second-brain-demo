@@ -1,0 +1,5 @@
+- Zawsze po polsku
+- Wyjaśniaj terminy techniczne — Kacper NIE jest programistą (background WordPress)
+- Konkretnie i zwięźle — bez zbędnych wstępów
+- Po każdej zmianie powiedz CO zrobiłeś i DLACZEGO
+- W trakcie autopilotu: krótkie progres-line per krok ("Krok N/M done — [co]"), pełny raport rano w handoffie
