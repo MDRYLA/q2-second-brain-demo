@@ -1,11 +1,12 @@
 import { createClient as createServerClient } from "@/lib/supabase/server";
 import { createClient as createAdminClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
+import { DEMO_MODE } from "@/lib/env";
 
-// First-time crypto setup: insert user row z saltem.
-// RLS revokes INSERT on `users` od authenticated (002_rls.sql) — wymaga service_role.
-// Endpoint weryfikuje sesję przez auth cookie, potem wykonuje insert jako admin
-// dla user.id z tej sesji (zapobiega impersonation).
+// First-time crypto setup: insert user row with salt.
+// RLS revokes INSERT on `users` for authenticated (002_rls.sql) — requires service_role.
+// Endpoint verifies session via auth cookie, then performs insert as admin
+// for user.id from that session (prevents impersonation).
 
 interface SetupPayload {
   salt: string;
@@ -15,6 +16,11 @@ interface SetupPayload {
 }
 
 export async function POST(request: Request) {
+  // Demo mode: no-op success — passphrase setup state lives in client memory only.
+  if (DEMO_MODE) {
+    return NextResponse.json({ ok: true, demo: true });
+  }
+
   let payload: SetupPayload;
   try {
     payload = (await request.json()) as SetupPayload;
@@ -25,11 +31,11 @@ export async function POST(request: Request) {
   if (!payload?.salt || typeof payload.salt !== "string") {
     return NextResponse.json({ error: "Missing salt." }, { status: 400 });
   }
-  // Defensive: NIE pozwol na dowolnie dlugiego stringa w DB.
+  // Defensive: don't allow arbitrarily long strings in DB.
   if (payload.salt.length < 32 || payload.salt.length > 512) {
     return NextResponse.json({ error: "Invalid salt length." }, { status: 400 });
   }
-  // Walidacja PBKDF2 iteracji — minimum 600k (OWASP 2026, hardcoded w kdf.ts).
+  // PBKDF2 iterations validation — minimum 600k (OWASP 2026, hardcoded in kdf.ts).
   if (payload.pbkdf2_params && typeof payload.pbkdf2_params.iterations === "number" && payload.pbkdf2_params.iterations < 600000) {
     return NextResponse.json({ error: "Insufficient PBKDF2 iterations (min 600000)." }, { status: 400 });
   }
@@ -41,7 +47,7 @@ export async function POST(request: Request) {
     error: authError,
   } = await supabase.auth.getUser();
   if (authError || !user) {
-    return NextResponse.json({ error: "Brak sesji użytkownika." }, { status: 401 });
+    return NextResponse.json({ error: "No user session." }, { status: 401 });
   }
 
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;

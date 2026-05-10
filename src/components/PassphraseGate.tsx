@@ -9,6 +9,7 @@ import {
   loginWithPassphrase,
   WrongPassphraseError,
 } from "@/lib/auth/passphrase-flow";
+import { DEMO_MODE } from "@/lib/env";
 
 type GateMode = "loading" | "db-not-ready" | "setup" | "setup-confirm" | "unlock" | "unlocked";
 
@@ -128,7 +129,8 @@ export function PassphraseGate({ children }: { children: ReactNode }) {
       .finally(() => setLoading(false));
   }, [mode, userId, supabaseSalt, supabaseSentinel, passphrase, setKey, cooldownUntil]);
 
-  if (key || mode === "unlocked") return <>{children}</>;
+  // Demo mode: bypass auth gate entirely. Reviewers see protected content immediately.
+  if (DEMO_MODE || key || mode === "unlocked") return <>{children}</>;
 
   if (mode === "loading") {
     return (

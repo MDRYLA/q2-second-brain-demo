@@ -9,6 +9,7 @@ import {
   loginWithPassphrase,
   WrongPassphraseError,
 } from "@/lib/auth/passphrase-flow";
+import { DEMO_MODE } from "@/lib/env";
 import { Button } from "./Button";
 import { Card } from "./Card";
 import { Input } from "./Input";
@@ -131,7 +132,8 @@ export function BoldV1PassphraseGate({ children }: { children: ReactNode }) {
       .finally(() => setLoading(false));
   }, [mode, userId, supabaseSalt, supabaseSentinel, passphrase, setKey, cooldownUntil]);
 
-  if (key || mode === "unlocked") return <>{children}</>;
+  // Demo mode: bypass auth gate entirely. Reviewers see protected content immediately.
+  if (DEMO_MODE || key || mode === "unlocked") return <>{children}</>;
 
   // Wrapper — magazine cover layout (deep green bg, cream paper card centered, tulip hero)
   const Wrapper = ({ children: inner }: { children: ReactNode }) => (

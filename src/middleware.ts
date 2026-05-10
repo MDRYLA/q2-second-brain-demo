@@ -1,34 +1,44 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { DEMO_MODE, DEMO_USER } from "@/lib/env";
 
 export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) =>
-            request.cookies.set(name, value)
-          );
-          supabaseResponse = NextResponse.next({ request });
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
-          );
-        },
-      },
-    }
-  );
+  // Demo mode: synthetic user, no Supabase calls. Reviewers reach the dashboard
+  // without configuring any backend.
+  let user: { id: string; email: string } | null = DEMO_MODE ? DEMO_USER : null;
 
-  // Refresh session without triggering auth events
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  if (!DEMO_MODE) {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    if (!url || !anonKey) {
+      // Fail safe to demo mode rather than crashing the route.
+      console.warn("Supabase env missing — falling back to anonymous user (no auth gate).");
+    } else {
+      const supabase = createServerClient(url, anonKey, {
+        cookies: {
+          getAll() {
+            return request.cookies.getAll();
+          },
+          setAll(cookiesToSet) {
+            cookiesToSet.forEach(({ name, value }) =>
+              request.cookies.set(name, value)
+            );
+            supabaseResponse = NextResponse.next({ request });
+            cookiesToSet.forEach(({ name, value, options }) =>
+              supabaseResponse.cookies.set(name, value, options)
+            );
+          },
+        },
+      });
+
+      const result = await supabase.auth.getUser();
+      user = result.data.user
+        ? { id: result.data.user.id, email: result.data.user.email ?? "" }
+        : null;
+    }
+  }
 
   const pathname = request.nextUrl.pathname;
 
