@@ -33,7 +33,7 @@
     "@scure/bip39": "^2.2.0",
     "@supabase/ssr": "^0.10.2",
     "@supabase/supabase-js": "^2.47.0",
-    "lucide-react": "^0.468.0",
+    "lucide-react": "^1.14.0",
     "next": "^16.2.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
