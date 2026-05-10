@@ -1,9 +1,8 @@
 import type { NextConfig } from "next";
 
-// Security headers (audit Fala 3 / 2026-04-27, hardening Faza 7 / 2026-05-08).
-// Faza 7: HSTS dodane explicit (wczesniej Vercel auto na .vercel.app), removed unsafe-eval
-// (NIE potrzebne w prod Next.js 15+). unsafe-inline pozostaje (App Router hydration chunks
-// — full nonce migration wymaga middleware refactor, odroczone).
+// Security headers. CSP intentionally allows 'unsafe-inline' for Next.js App Router
+// hydration chunks; full nonce migration is acknowledged technical debt
+// (see ARCHITECTURE.md → "Open architectural debt").
 const securityHeaders = [
   {
     key: "Content-Security-Policy",
@@ -33,11 +32,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   typedRoutes: true,
+  poweredByHeader: false,
   // Ensure .seed-input markdown files are bundled for server runtime on Vercel.
-  // Faza 7 fresh-review fix: cytaty.md MISSING — getSeedContent("cytaty") wywoływane przez
-  // /v/bold-v1/dashboard, /v/chrome-v2/dashboard, /cytaty (oba warianty) przez page.tsx server.
-  // Bez tego: Vercel Serverless funkcji nie ma cytaty.md w bundlu → fs.readFileSync ENOENT →
-  // catch returns null → cytaty NIE seedują przy pierwszym snapshot fetch (silent failure).
+  // Without this, fs.readFileSync ENOENT → seed content silently null on first render.
   outputFileTracingIncludes: {
     "/konstytucja": [".seed-input/konstytucja.md"],
     "/o-mnie-teraz": [".seed-input/o-mnie-teraz.md"],
@@ -46,6 +43,10 @@ const nextConfig: NextConfig = {
     "/v/chrome-v2/dashboard": [".seed-input/cytaty.md"],
     "/v/bold-v1/cytaty": [".seed-input/cytaty.md"],
     "/v/chrome-v2/cytaty": [".seed-input/cytaty.md"],
+    "/v/bold-v1/konstytucja": [".seed-input/konstytucja.md"],
+    "/v/chrome-v2/konstytucja": [".seed-input/konstytucja.md"],
+    "/v/bold-v1/o-mnie-teraz": [".seed-input/o-mnie-teraz.md"],
+    "/v/chrome-v2/o-mnie-teraz": [".seed-input/o-mnie-teraz.md"],
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];

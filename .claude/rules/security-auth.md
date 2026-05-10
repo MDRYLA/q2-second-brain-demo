@@ -1,5 +1,0 @@
-- Auth middleware na WSZYSTKICH routes — default-deny (whitelist publiczne ścieżki: `/login`, `/api/auth/*`)
-- W public demo: middleware MUSI mieć fallback "demo user injection" gdy `NEXT_PUBLIC_DEMO_MODE=true` — komitet nie może być zablokowany loginem
-- Sesje: httpOnly cookies > localStorage (XSS resistance)
-- BIP-39 mnemonic NIGDY w kodzie, NIGDY w testach jako hardcoded — generuj ad-hoc lub używaj fixture z mnemonic.test.ts (jeśli jest, zostaw — to test, NIE prod data)
-- PBKDF2 iterations ≥600k (NIE obniżaj dla "wygody demo")

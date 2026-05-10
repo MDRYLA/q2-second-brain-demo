@@ -15,7 +15,12 @@ type LoginView = "checking" | "passphrase" | "email" | "sent";
 export function LoginClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const next = searchParams?.get("next") ?? "/v/bold-v1/dashboard";
+  // Allow only same-origin internal paths — block //evil.com, https://evil.com, /\evil.com
+  const rawNext = searchParams?.get("next") ?? "/v/bold-v1/dashboard";
+  const next =
+    rawNext.startsWith("/") && !rawNext.startsWith("//") && !rawNext.startsWith("/\\")
+      ? rawNext
+      : "/v/bold-v1/dashboard";
 
   const [view, setView] = useState<LoginView>("checking");
   const [passphrase, setPassphrase] = useState("");

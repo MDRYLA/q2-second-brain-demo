@@ -17,7 +17,12 @@ const pad3 = (n: number): string => String(n).padStart(3, "0");
 export function LoginClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const next = searchParams?.get("next") ?? "/v/chrome-v2/dashboard";
+  // Allow only same-origin internal paths — block //evil.com, https://evil.com, /\evil.com
+  const rawNext = searchParams?.get("next") ?? "/v/chrome-v2/dashboard";
+  const next =
+    rawNext.startsWith("/") && !rawNext.startsWith("//") && !rawNext.startsWith("/\\")
+      ? rawNext
+      : "/v/chrome-v2/dashboard";
 
   const [view, setView] = useState<LoginView>("checking");
   const [passphrase, setPassphrase] = useState("");

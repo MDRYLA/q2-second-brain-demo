@@ -31,13 +31,26 @@ export async function POST(request: Request) {
   if (!payload?.salt || typeof payload.salt !== "string") {
     return NextResponse.json({ error: "Missing salt." }, { status: 400 });
   }
-  // Defensive: don't allow arbitrarily long strings in DB.
-  if (payload.salt.length < 32 || payload.salt.length > 512) {
-    return NextResponse.json({ error: "Invalid salt length." }, { status: 400 });
+  // Salt must be base64 of exactly 32 bytes (44 chars: 32/3*4 rounded + padding).
+  if (!/^[A-Za-z0-9+/]{43}=$/.test(payload.salt)) {
+    return NextResponse.json({ error: "Invalid salt format." }, { status: 400 });
   }
-  // PBKDF2 iterations validation — minimum 600k (OWASP 2026, hardcoded in kdf.ts).
-  if (payload.pbkdf2_params && typeof payload.pbkdf2_params.iterations === "number" && payload.pbkdf2_params.iterations < 600000) {
-    return NextResponse.json({ error: "Insufficient PBKDF2 iterations (min 600000)." }, { status: 400 });
+  // PBKDF2 params: full shape validation. Reject anything that doesn't match the
+  // exact production parameters used by lib/crypto/kdf.ts.
+  if (payload.pbkdf2_params) {
+    const p = payload.pbkdf2_params;
+    const keyLen = p.keyLength ?? p.keylen;
+    if (
+      typeof p.iterations !== "number" ||
+      p.iterations < 600000 ||
+      p.hash !== "SHA-256" ||
+      keyLen !== 32
+    ) {
+      return NextResponse.json(
+        { error: "Invalid PBKDF2 params (require: iterations>=600000, hash=SHA-256, keyLength=32)." },
+        { status: 400 },
+      );
+    }
   }
 
   // Verify caller's session via auth cookie.
@@ -93,15 +106,20 @@ export async function POST(request: Request) {
   return NextResponse.json({ ok: true });
 }
 
-export function OPTIONS() {
-  const allowedOrigin = process.env.NEXT_PUBLIC_APP_URL ?? "";
-  return new NextResponse(null, {
-    status: 204,
-    headers: {
-      "Access-Control-Allow-Origin": allowedOrigin,
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Max-Age": "86400",
-    },
-  });
+export function OPTIONS(request: Request) {
+  // Allowlist: configured app URL only. Origin must match exactly — no wildcards,
+  // no empty fallback. Unknown origins get a no-CORS response (header omitted).
+  const allowedOrigin = process.env.NEXT_PUBLIC_APP_URL;
+  const requestOrigin = request.headers.get("origin");
+  const headers: Record<string, string> = {
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Max-Age": "86400",
+    Vary: "Origin",
+    "Cache-Control": "no-store",
+  };
+  if (allowedOrigin && requestOrigin === allowedOrigin) {
+    headers["Access-Control-Allow-Origin"] = allowedOrigin;
+  }
+  return new NextResponse(null, { status: 204, headers });
 }

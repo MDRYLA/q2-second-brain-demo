@@ -13,8 +13,15 @@ export async function middleware(request: NextRequest) {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
     if (!url || !anonKey) {
-      // Fail safe to demo mode rather than crashing the route.
-      console.warn("Supabase env missing — falling back to anonymous user (no auth gate).");
+      // Fail-CLOSED: misconfigured production deploy must not silently downgrade
+      // to anonymous mode. Operator must either set NEXT_PUBLIC_DEMO_MODE=true
+      // or provide Supabase credentials.
+      return new NextResponse(
+        "Service Unavailable — Supabase configuration missing. " +
+          "Set NEXT_PUBLIC_DEMO_MODE=true to run without backend, or configure " +
+          "NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.",
+        { status: 503 },
+      );
     } else {
       const supabase = createServerClient(url, anonKey, {
         cookies: {
