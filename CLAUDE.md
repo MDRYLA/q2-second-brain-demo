@@ -186,7 +186,7 @@ Przed pracą — przeczytaj **ostatni handoff** dla kontekstu poprzedniej sesji:
 `docs/handoffs/` (sortowane po dacie).
 
 Recent (max 10 — starsze tylko w folderze):
-_(pusta — zapełni się przez `/handoff` lub `/handoff-full`)_
+- [2026-05-10 overnight autopilot — public demo created from scratch](docs/handoffs/2026-05-10-overnight-autopilot.md) — full execution log: 10 fazy, 4 commits, 36 routes built, 106 tests passing, live na q2-second-brain-demo.vercel.app
 
 Pełne archiwum: `ls docs/handoffs/`.
 
