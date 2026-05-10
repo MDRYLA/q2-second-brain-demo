@@ -96,7 +96,7 @@ When `NEXT_PUBLIC_DEMO_MODE=true` (default in `.env.example`), all Supabase call
 
 ## Important constraints (this repo specifically)
 
-1. **No personal data, ever.** Every seed, fixture, screenshot, comment must be generic. If you see "Kacper", "Dryla", "Amelka", "Konstytucja", "kacperdrylaa@gmail.com", or any phone/birthdate/address — replace with a placeholder.
+1. **No personal data, ever.** Every seed, fixture, screenshot, comment must be generic. If you see the author's first name, surname, real email, phone number, birth date, or address anywhere — replace with a placeholder. Names of the author's relatives are also off-limits.
 2. **No live credentials.** `.env*` files (except `.env.example`) are gitignored. Any `sk-ant-`, `eyJhbGci`, `sbp_`, `sk_live`, `pk_live`, `AIza`, `AKIA` prefix in a tracked file is a CI failure waiting to happen — strip it.
 3. **Demo mode is the default.** Don't rip out the `NEXT_PUBLIC_DEMO_MODE` branching. Reviewers must be able to clone → `pnpm install` → `pnpm dev` and have a working app with zero env config.
 4. **Don't break both variants.** UI changes touch `bold-v1` AND `chrome-v2` unless explicitly variant-specific.
