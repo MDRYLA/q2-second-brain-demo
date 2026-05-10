@@ -116,7 +116,7 @@ tests/e2e/                  # Playwright specs
 ```bash
 pnpm dev              # next dev --turbopack
 pnpm typecheck        # tsc --noEmit
-pnpm lint             # eslint, max-warnings 0
+pnpm lint             # eslint (errors fail; warnings tracked, see ARCHITECTURE.md debt)
 pnpm test             # vitest watch
 pnpm test:run         # vitest run, exits non-zero if no tests
 pnpm test:e2e         # playwright test

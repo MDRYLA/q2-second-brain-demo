@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Cormorant_Garamond, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { DEMO_MODE } from "@/lib/env";
+import { DemoBanner } from "@/components/DemoBanner";
 
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
@@ -24,8 +26,14 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Q2",
-  description: "Personal journal + planning + AI coach",
+  title: {
+    default: DEMO_MODE
+      ? "Q2 Second Brain — Demo (Bison Fellowship 2026)"
+      : "Q2 — Second Brain",
+    template: "%s — Q2",
+  },
+  description:
+    "Personal journaling, planning and habit-tracker app with end-to-end client-side encryption. Two design variants, one codebase.",
   manifest: "/manifest.json",
   icons: {
     icon: [
@@ -68,7 +76,10 @@ export default function RootLayout({
       data-theme="light"
       className={`${inter.variable} ${cormorant.variable} ${jetbrains.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <DemoBanner />
+        {children}
+      </body>
     </html>
   );
 }
